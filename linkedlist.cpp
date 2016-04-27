@@ -1,5 +1,5 @@
 #include <iostream>
-#include "LinkedList.h"
+#include "linkedlist.h"
 
 template <class Type>
 bool LinkedList<Type>::isEmptyList() const
@@ -211,16 +211,53 @@ void LinkedList<Type>::deleteNode(const Type& deleteItem)
     }//end else
 }//end deleteNode
 
+/*
+*isSortedList: Runs through the list to see if it is sorted in ascending order.
+*Parameters: N/A
+*Return Value: bool true/false
+*/
 template <class Type>
 bool LinkedList<Type>::isSortedList() const
 {
-  //INSERT YOUR CODE HERE
+  if(count > 0){
+    nodeType<Type> *current = first->link;
+    nodeType<Type> *previous = first;
+    for(; current != NULL; previous = current, current = current->link){
+      if(previous->info > current->info)
+        return false;
+    }
+    return true;
+  }
+  return false;
 }
 
+/*
+*sortList: Sorts list using bubble sort.
+*Parameters: N/A
+*Return Value: N/A
+*/
 template <class Type>
 void LinkedList<Type>::sortList()
 {
-  //INSERT YOUR CODE HERE
+    //Declares pointers to move through list
+    nodeType<Type> *current;
+    nodeType<Type> *next;
+    nodeType<Type> *temp;
+    
+    //Sets current to point to first element and next to point to second element.
+    current = first;
+    next = current->link;
+    
+   for(int j = 0; j < count - 1; j++){
+      for(int k = 0; k < count - j - 1; k++){
+        //if the LHS value is greater than the RHS value, adjust pointers.
+        if(current->info > next->info){
+          temp = current;
+          current = next;
+          next = temp;
+        }
+      } 
+    }
 }
 
 
